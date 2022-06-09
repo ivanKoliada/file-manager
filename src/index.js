@@ -1,3 +1,8 @@
 import init from './app.js';
+import { error } from './modules/handlers/errorHandler.js';
 
-init();
+try {
+  init();
+} catch (err) {
+  if (err) error();
+}

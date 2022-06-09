@@ -11,7 +11,11 @@ const up = () => {
 }
 
 const cd = (path) => {
-  chdir(`${path}`);
+  try {
+    chdir(`${path}`);
+  } catch (err) {
+    if (err) error();
+  }  
 
   const directory = cwd();
 

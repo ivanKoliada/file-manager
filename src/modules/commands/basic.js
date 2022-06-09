@@ -8,8 +8,9 @@ const cat = (path) => {
   readableStream.on('error', error);    
 }
 
-const add = (path) => {
-  const writableStream = createWriteStream(path);  
+const add = async (path) => {
+  const writableStream = await createWriteStream(path);  
+  writableStream.close();
   writableStream.on('error', error); 
 }
 
