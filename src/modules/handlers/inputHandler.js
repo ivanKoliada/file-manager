@@ -3,8 +3,9 @@ import { up, cd, ls } from '../commands/navigation.js';
 import hash from '../commands/hash.js';
 import { cat, add, rn, cp, rm } from '../commands/basic.js';
 import { compress, decompress } from '../commands/archive.js';
-import { eol, cpus, homedir, architecture, username } from '../commands/system.js';
 import { error } from './errorHandler.js';
+import { COMMANDS} from '../constants.js';
+import { sysOperation } from '../commands/system.js';
 
 const inputHandler = async (data) => {
   const input = data.split(' ');
@@ -14,67 +15,62 @@ const inputHandler = async (data) => {
   const pathToNext = input[2];
 
   switch (key) {
-    case 'up':
+    case COMMANDS.UP:
       if (pathToCurrent) error();
       else up();
       break;
 
-    case 'cd':
+    case COMMANDS.CD:
       if (pathToNext) error();
       else cd(pathToCurrent);
       break;
 
-    case 'ls':
+    case COMMANDS.LS:
       if (pathToCurrent) error();
-      else ls();
+      else await ls();
       break;
 
-    case 'hash':
+    case COMMANDS.HASH:
       hash(pathToCurrent);
       break;
 
-    case 'cat':
+    case COMMANDS.CAT:
       cat(pathToCurrent);
       break;
 
-    case 'add':
+    case COMMANDS.ADD:
       add(pathToCurrent);
       break;
 
-    case 'rn':
+    case COMMANDS.RN:
       rn(pathToCurrent, pathToNext);
       break;
 
-    case 'cp':
+    case COMMANDS.CP:
       cp(pathToCurrent, pathToNext);
       break;
 
-    case 'mv':
+    case COMMANDS.CP:
       await cp(pathToCurrent, pathToNext);
       rm(pathToCurrent);
       break;
 
-    case 'rm':
+    case COMMANDS.RM:
       rm(pathToCurrent, pathToNext);
       break;
 
-    case 'compress':
-      if (!pathToCurrent && !pathToNext) error();
+    case COMMANDS.COMPRESS:
+      if (!pathToCurrent || !pathToNext) error();
       else compress(pathToCurrent, pathToNext);
       break;
 
-    case 'decompress':
-      if (!pathToCurrent && !pathToNext) error();
+    case COMMANDS.DECOMPRESS:
+      if (!pathToCurrent || !pathToNext) error();
       else decompress(pathToCurrent, pathToNext);
       break;
 
-    case 'os':
-      if (flag === '--EOL') eol();
-      else if (flag === '--cpus') cpus();
-      else if (flag === '--homedir') homedir();
-      else if (flag === '--username') username();
-      else if (flag === '--architecture') architecture();
-      else console.log('\x1b[31mInvalid input, you should enter another flag\x1b[0m');
+    case COMMANDS.OS:
+      sysOperation(flag);
       break;
 
     default:
