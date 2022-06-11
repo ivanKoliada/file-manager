@@ -1,6 +1,6 @@
 import { up, cd, ls } from '../commands/navigation.js';
 import hash from '../commands/hash.js';
-import { cat, add, rn, cp, mv, rm } from '../commands/basic.js';
+import { cat, add, rn, cp, rm } from '../commands/basic.js';
 import { compress, decompress } from '../commands/archive.js';
 import { eol, cpus, homedir, architecture, username } from '../commands/system.js';
 
@@ -45,7 +45,8 @@ const inputHandler = async (data) => {
       break;
     
     case 'mv':
-      mv(pathToCurrent, pathToNext)
+      await cp(pathToCurrent, pathToNext);
+      rm(pathToCurrent);
       break;
     
     case 'rm':
