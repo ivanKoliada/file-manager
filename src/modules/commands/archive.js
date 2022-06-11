@@ -6,24 +6,26 @@ const compress = (pathToCurrent, pathToNext) => {
   const zip = createBrotliCompress();
 
   const readableStream = createReadStream(pathToCurrent);
+  readableStream.on('error', error);
   const writableStream = createWriteStream(pathToNext);
+  writableStream.on('error', error);
 
   readableStream
     .pipe(zip)
     .pipe(writableStream)
-    .on('error', error);
 }
 
 const decompress = (pathToCurrent, pathToNext) => {
   const unzip = createBrotliDecompress();
 
   const readableStream = createReadStream(pathToCurrent);
+  readableStream.on('error', error);
   const writableStream = createWriteStream(pathToNext);
+  writableStream.on('error', error);
 
   readableStream
     .pipe(unzip)
     .pipe(writableStream)
-    .on('error', error);
 }
 
 export { compress, decompress }
