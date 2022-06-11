@@ -5,7 +5,7 @@ import { error } from '../handlers/errorHandler.js';
 
 const cat = (path) => {
   const readableStream = createReadStream(path, 'utf8');
-  readableStream.on('data', (chunk) => console.log('\x1b[34m', chunk, '\x1b[0m'));
+  readableStream.on('data', (chunk) => console.log('\x1b[33m', chunk, '\x1b[0m'));
   readableStream.on('error', error);
 };
 
