@@ -4,10 +4,6 @@ import { error } from '../handlers/errorHandler.js';
 
 const up = () => {
   chdir('..');
-
-  const directory = cwd();
-
-  console.log(`\x1b[34m\nYou are currently in ${directory}\x1b[0m`);
 }
 
 const cd = (path) => {
@@ -16,10 +12,6 @@ const cd = (path) => {
   } catch (err) {
     if (err) error();
   }  
-
-  const directory = cwd();
-
-  console.log(`\x1b[34m\nYou are currently in ${directory}\x1b[0m`);
 }
 
 const ls = async () => {
