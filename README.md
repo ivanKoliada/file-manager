@@ -10,8 +10,7 @@
 * The program is started by terminal command in following way:
   node src/ --username=your_username
   
-### List of operations and their syntax:
-__USE * INSTEAD OF A SPACE IN FILENAME__  
+### __USE * INSTEAD OF A SPACE IN FILENAME__  
 ```
 ❌ INCORRECTLY:   
 D:\file-manager\src\new folder\
@@ -20,6 +19,7 @@ D:\file-manager\src\new folder\
 ✔️ CORRECTLY:  
 D:\file-manager\src\new*folder\
 ```
+### List of operations and their syntax:
 * cd path_to_directory  
   for example:
   * cd D:\file-manager\src\modules\commands
