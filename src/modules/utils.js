@@ -22,23 +22,20 @@ const isPathExist = async (path) => {
 };
 
 const commandsParser = async (data) => {  
-  const arrInput = data.split(' ');
-  const arrTemp = data.split(' ');
-  arrTemp.shift();
-  const optionalPath = arrTemp.join(' ');
+  const arrInput = data
+    .split(' ')
+    .map(el => el.replace(/\*/g, ' '));
   const pathToCurrent = arrInput[1];
   const flag = arrInput[1];
   const pathToNext = arrInput[2];
   const isExist = !pathToCurrent || await isPathExist(pathToCurrent);
   const command = isExist ? arrInput[0] : COMMANDS.NO_EXIST;
-  // const command = arrInput[0];
   
   return {
     command,
     pathToCurrent,
     flag,
-    pathToNext,
-    optionalPath,
+    pathToNext
   };
 };
 

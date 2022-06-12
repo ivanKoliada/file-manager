@@ -21,7 +21,7 @@ const inputHandler = async (data) => {
       break;
 
     case COMMANDS.CD:
-      commandCd(optionalPath);
+      commandCd(pathToCurrent);
       break;
 
     case COMMANDS.LS:
