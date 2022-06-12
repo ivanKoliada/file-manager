@@ -9,7 +9,7 @@ import { sayingBye, commandsParser } from '../utils.js';
 import { error } from './errorHandler.js';
 
 const inputHandler = async (data) => {
-  const { command, pathToCurrent, flag, pathToNext, optionalPath } = await commandsParser(data);
+  const { command, pathToCurrent, flag, pathToNext } = await commandsParser(data);
 
   switch (command) {
     case COMMANDS.EXIT:
@@ -33,7 +33,7 @@ const inputHandler = async (data) => {
       break;
 
     case COMMANDS.CAT:
-      await commandCat(pathToCurrent);
+      commandCat(pathToCurrent);
       break;
 
     case COMMANDS.ADD:
@@ -45,7 +45,7 @@ const inputHandler = async (data) => {
       break;
 
     case COMMANDS.CP:
-      commandCp(pathToCurrent, pathToNext);
+      await commandCp(pathToCurrent, pathToNext);
       break;
 
     case COMMANDS.MV:

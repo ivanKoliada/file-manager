@@ -8,7 +8,12 @@ export const sysOperation = (flag) => {
       break;
   
     case OS.CPUS:
-      console.log(cpus());
+      console.log(
+        cpus().map((el) => ({
+          model: el.model,
+          speed: Math.floor(el.speed / 100) / 10,
+        })),
+      );
       break;
   
     case OS.HOME_DIR:
