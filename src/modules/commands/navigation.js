@@ -16,12 +16,10 @@ const commandCd = (path) => {
 
 const commandLs = async () => {
   const pathToFolder = cwd();
-  const array = [];
-  const files = await readdir(pathToFolder, { withFileTypes: true }).catch(error);
-
-  files.forEach((file) => array.push(file.name));
-
-  console.log(array);
+  await readdir(pathToFolder, { withFileTypes: true })
+    .then(res => res.map(file => file.name))
+    .then(console.log)
+    .catch(error);
 };
 
 export { commandUp, commandCd, commandLs };

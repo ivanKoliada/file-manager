@@ -30,17 +30,6 @@ const commandCp = async (pathToCurrent, pathToNext) => {
   readableStream.pipe(writableStream);
 };
 
-// const cp = (pathToCurrent, pathToNext) => {
-//   copy(pathToCurrent, pathToNext,
-//     { errorOnExist: true, force: false, recursive: true })
-//     .catch(error);
-// }
-
-// const mv = async (pathToCurrent, pathToNext) => {
-//   await copy(pathToCurrent, pathToNext, { errorOnExist: true, force: false, recursive: true }).catch(error);
-//   remove(pathToCurrent, { recursive: true });
-// };
-
 const commandRm = (pathToCurrent) => {
   rm(pathToCurrent, { recursive: true }).catch(error);
 };
