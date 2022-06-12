@@ -1,6 +1,7 @@
 # file-manager
 
 ### Cross-check review:
+1. Make sure that you have **v16 LTS Node** installed on your computer
 1. git clone https://github.com/ivanKoliada/file-manager.git
 1. git checkout file-manager
 
@@ -10,14 +11,13 @@
 * The program is started by terminal command in following way:
   node src/ --username=your_username
   
-### __USE * INSTEAD OF A SPACE IN FILENAME__  
+> **NOTE:** `USE * INSTEAD OF A SPACE IN FILENAME`  
 ```
-❌ INCORRECTLY:   
-D:\file-manager\src\new folder\
+ ❌ INCORRECTLY:   
+ D:\file-manager\src\new folder\
 
-
-✔️ CORRECTLY:  
-D:\file-manager\src\new*folder\
+ ✔️ CORRECTLY:  
+ D:\file-manager\src\new*folder\
 ```
 ### List of operations and their syntax:
 * cd path_to_directory  
@@ -57,6 +57,12 @@ D:\file-manager\src\new*folder\
   * rm ..\file.txt
   * rm .\folder\file.txt
   * rm .\folder\folder
+### Operating system info
+* os --EOL Get EOL (default system End-Of-Line).
+* os --cpus Get host machine CPUs info (overall amount of CPUS plus model and clock rate (in GHz) for each of them).
+* os --homedir Get home directory.
+* os --username Get current system user name (Do not confuse with the username that is set when the application starts)
+* os --architecture Get CPU architecture for which Node.js binary has compiled
 ### Hash calculation: 
 * hash path_to_file
   for example:
