@@ -11,14 +11,15 @@ const COMMANDS = {
   RM: 'rm',
   COMPRESS: 'compress',
   DECOMPRESS: 'decompress',
-  OS: 'os'
+  OS: 'os',
+  EXIT: '.exit'
 }
 
 const OS = {
   EOL: '--EOL',
   CPUS: '--cpus',
   HOME_DIR: '--homedir',
-  USER_NAME: '--username',
+  SYS_USER_NAME: '--username',
   ARCH: '--architecture',
 };
 
