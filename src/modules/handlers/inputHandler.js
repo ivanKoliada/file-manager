@@ -6,9 +6,10 @@ import { commandCompress, commandDecompress } from '../commands/archive.js';
 import { COMMANDS} from '../constants.js';
 import { sysOperation } from '../commands/system.js';
 import { sayingBye, commandsParser } from '../utils.js';
+import { error } from './errorHandler.js';
 
 const inputHandler = async (data) => {
-  const { command, pathToCurrent, flag, pathToNext, optionalPath } = commandsParser(data);
+  const { command, pathToCurrent, flag, pathToNext, optionalPath } = await commandsParser(data);
 
   switch (command) {
     case COMMANDS.EXIT:
@@ -66,6 +67,10 @@ const inputHandler = async (data) => {
 
     case COMMANDS.OS:
       sysOperation(flag);
+      break;
+    
+    case COMMANDS.NO_EXIST:
+      error();
       break;
 
     default:

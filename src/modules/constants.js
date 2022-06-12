@@ -12,7 +12,8 @@ const COMMANDS = {
   COMPRESS: 'compress',
   DECOMPRESS: 'decompress',
   OS: 'os',
-  EXIT: '.exit'
+  EXIT: '.exit',
+  NO_EXIST: 'noExist'
 }
 
 const OS = {
