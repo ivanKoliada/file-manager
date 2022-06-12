@@ -9,7 +9,25 @@ const argumentsParser = () => {
   process.env.USER_NAME = args.slice(equalSign);
 }
 
-export { sayingBye, argumentsParser };
+const commandsParser = (data) => {
+  const arrInput = data.split(' ');
+  const arrTemp = data.split(' ');
+  arrTemp.shift();
+  const optionalPath = arrTemp.join(' ');
+  const command = arrInput[0];
+  const pathToCurrent = arrInput[1];
+  const flag = arrInput[1];
+  const pathToNext = arrInput[2];
+  return {
+    command,
+    pathToCurrent,
+    flag,
+    pathToNext,
+    optionalPath,
+  };
+}
+
+export { sayingBye, argumentsParser, commandsParser };
 
 
 
@@ -24,11 +42,7 @@ export { sayingBye, argumentsParser };
 
 // const parser = (data) => { };
 
-// const input = data.split(' ');
-// const key = input[0];
-// const pathToCurrent = input[1];
-// const flag = input[1];
-// const pathToNext = input[2];
+
 
 // import { access } from 'fs/promises';
 // import { constants } from 'fs';

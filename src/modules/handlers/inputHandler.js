@@ -5,26 +5,22 @@ import { commandCat, commandAdd, commandRn, commandCp, commandRm } from '../comm
 import { commandCompress, commandDecompress } from '../commands/archive.js';
 import { COMMANDS} from '../constants.js';
 import { sysOperation } from '../commands/system.js';
-import { sayingBye } from '../utils.js';
+import { sayingBye, commandsParser } from '../utils.js';
 
 const inputHandler = async (data) => {
-  const input = data.split(' ');
-  const key = input[0];
-  const pathToCurrent = input[1];
-  const flag = input[1];
-  const pathToNext = input[2];
+  const { command, pathToCurrent, flag, pathToNext, optionalPath } = commandsParser(data);
 
-  switch (key) {
+  switch (command) {
     case COMMANDS.EXIT:
       sayingBye();
       break;
-    
+
     case COMMANDS.UP:
       commandUp();
       break;
 
     case COMMANDS.CD:
-      commandCd(pathToCurrent);
+      commandCd(optionalPath);
       break;
 
     case COMMANDS.LS:
