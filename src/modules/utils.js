@@ -28,7 +28,9 @@ const commandsParser = async (data) => {
   const pathToCurrent = arrInput[1];
   const flag = arrInput[1];
   const pathToNext = arrInput[2];
-  const isExist = !pathToCurrent || await isPathExist(pathToCurrent);
+  const isExist = !pathToCurrent
+    || arrInput[0] === COMMANDS.OS
+    || await isPathExist(pathToCurrent);
   const command = isExist ? arrInput[0] : COMMANDS.NO_EXIST;
   
   return {
