@@ -1,1 +1,76 @@
 # file-manager
+
+### Cross-check review:
+1. git clone https://github.com/ivanKoliada/file-manager.git
+1. git checkout file-manager
+
+### How to use?:
+* The program is started by npm-script start in following way:
+  npm run start -- --username=your_username
+* The program is started by terminal command in following way:
+  node src/ --username=your_username
+  
+### List of operations and their syntax:
+__USE * INSTEAD OF A SPACE IN FILENAME__  
+```
+❌ INCORRECTLY:   
+D:\file-manager\src\new folder\
+
+
+✔️ CORRECTLY:  
+D:\file-manager\src\new*folder\
+```
+* cd path_to_directory  
+  for example:
+  * cd D:\file-manager\src\modules\commands
+  * cd ..\folder
+  * cd .\folder\folder
+  * cd D:\folder*name\folder
+* cat path_to_file  
+  for example:
+  * cat D:\file-manager\src\index.js
+  * cat ..\file.txt
+  * cat .\folder\file.txt
+* add new_file_name  
+  for example:
+  * add file.txt
+* rn path_to_file new_filename  
+  for example:
+  * rename D:\file-manager\src\index.js D:\file-manager\src\index2.js
+  * rename file.txt file2.txt
+  * rename .\folder\file.txt .\folder\file2.txt
+* cp path_to_file path_to_new_directory 
+  for example:
+  * cp D:\file-manager\src\index.js D:\file-manager\
+  * cp file.txt .\folder\
+  * cp .\folder\file.txt .\
+  * cp .\folder\file.txt ..\
+* mv path_to_file path_to_new_directory
+  for example:
+  * mv D:\file-manager\src\index.js D:\file-manager\
+  * mv file.txt .\folder\
+  * mv .\folder\file.txt .\
+  * mv .\folder\file.txt ..\
+* rm path_to_file  
+  for example:
+  * rm D:\file-manager\src\index.js
+  * rm ..\file.txt
+  * rm .\folder\file.txt
+  * rm .\folder\folder
+### Hash calculation: 
+* hash path_to_file
+  for example:
+  * hash D:\file-manager\src\index.js
+  * hash ..\file.txt
+  * hash .\folder\file.txt
+### Compress and decompress operations:
+* compress path_to_file path_to_destination  
+  for example:
+  * compress D:\file-manager\src\index.js D:\file-manager\src\index.js.br
+  * compress .\folder\file.js D:\file-manager\file
+  * compress ..\folder\file.txt D:\file.br
+* decompress path_to_file path_to_destination  
+  for example:
+  * decompress D:\file-manager\src\index.js.br D:\file-manager\src\index.js
+  * decompress .\folder\file D:\file-manager\file.txt
+  * decompress ..\folder\file.br D:\file.js
