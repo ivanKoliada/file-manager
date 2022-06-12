@@ -2,7 +2,7 @@ import inputHandler from './modules/handlers/inputHandler.js';
 import { argumentsParser, sayingBye } from './modules/utils.js';
 import { homedir } from 'os';
 import { createInterface } from 'readline';
-import { stdin as input, stdout as output , chdir, cwd, exit } from 'process';
+import { stdin as input, stdout as output , chdir, cwd} from 'process';
 
 const rl = createInterface({ input, output });
 

@@ -1,4 +1,4 @@
-import { EOL, cpus as CPUs, homedir as hDir, arch, userInfo } from 'os';
+import { EOL, cpus, homedir, arch, userInfo } from 'os';
 import { OS } from '../constants.js';
 
 export const sysOperation = (flag) => {
@@ -8,14 +8,14 @@ export const sysOperation = (flag) => {
       break;
   
     case OS.CPUS:
-      console.log(CPUs());
+      console.log(cpus());
       break;
   
     case OS.HOME_DIR:
-      console.log(`\x1b[34m\n${hDir()}\x1b[0m`);
+      console.log(`\x1b[34m\n${homedir()}\x1b[0m`);
       break;
   
-    case OS.USER_NAME:
+    case OS.SYS_USER_NAME:
       console.log(`\x1b[34m\n${userInfo().username}\x1b[0m`);
       break;
   

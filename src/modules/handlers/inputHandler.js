@@ -1,11 +1,11 @@
 import { cwd } from 'process';
-import { up, cd, ls } from '../commands/navigation.js';
-import hash from '../commands/hash.js';
-import { cat, add, rn, cp, rm } from '../commands/basic.js';
-import { compress, decompress } from '../commands/archive.js';
-import { error } from './errorHandler.js';
+import { commandUp, commandCd, commandLs } from '../commands/navigation.js';
+import commandHash from '../commands/hash.js';
+import { commandCat, commandAdd, commandRn, commandCp, commandRm } from '../commands/basic.js';
+import { commandCompress, commandDecompress } from '../commands/archive.js';
 import { COMMANDS} from '../constants.js';
 import { sysOperation } from '../commands/system.js';
+import { sayingBye } from '../utils.js';
 
 const inputHandler = async (data) => {
   const input = data.split(' ');
@@ -15,58 +15,57 @@ const inputHandler = async (data) => {
   const pathToNext = input[2];
 
   switch (key) {
+    case COMMANDS.EXIT:
+      sayingBye();
+      break;
+    
     case COMMANDS.UP:
-      if (pathToCurrent) error();
-      else up();
+      commandUp();
       break;
 
     case COMMANDS.CD:
-      if (pathToNext) error();
-      else cd(pathToCurrent);
+      commandCd(pathToCurrent);
       break;
 
     case COMMANDS.LS:
-      if (pathToCurrent) error();
-      else await ls();
+      await commandLs();
       break;
 
     case COMMANDS.HASH:
-      hash(pathToCurrent);
+      await commandHash(pathToCurrent);
       break;
 
     case COMMANDS.CAT:
-      cat(pathToCurrent);
+      await commandCat(pathToCurrent);
       break;
 
     case COMMANDS.ADD:
-      add(pathToCurrent);
+      commandAdd(pathToCurrent);
       break;
 
     case COMMANDS.RN:
-      rn(pathToCurrent, pathToNext);
+      commandRn(pathToCurrent, pathToNext);
       break;
 
     case COMMANDS.CP:
-      cp(pathToCurrent, pathToNext);
+      commandCp(pathToCurrent, pathToNext);
       break;
 
-    case COMMANDS.CP:
-      await cp(pathToCurrent, pathToNext);
-      rm(pathToCurrent);
+    case COMMANDS.MV:
+      await commandCp(pathToCurrent, pathToNext);
+      commandRm(pathToCurrent);
       break;
 
     case COMMANDS.RM:
-      rm(pathToCurrent, pathToNext);
+      commandRm(pathToCurrent, pathToNext);
       break;
 
     case COMMANDS.COMPRESS:
-      if (!pathToCurrent || !pathToNext) error();
-      else compress(pathToCurrent, pathToNext);
+      commandCompress(pathToCurrent, pathToNext);
       break;
 
     case COMMANDS.DECOMPRESS:
-      if (!pathToCurrent || !pathToNext) error();
-      else decompress(pathToCurrent, pathToNext);
+      commandDecompress(pathToCurrent, pathToNext);
       break;
 
     case COMMANDS.OS:
@@ -77,9 +76,8 @@ const inputHandler = async (data) => {
       console.log('\x1b[31mInvalid input, you should enter another command\x1b[0m');
       break;
   }
-  const directory = cwd();
 
-  console.log(`\x1b[34m\nYou are currently in ${directory}\x1b[0m`);
+  console.log(`\x1b[34m\nYou are currently in ${cwd()}\x1b[0m`);
 };
 
 export default inputHandler;

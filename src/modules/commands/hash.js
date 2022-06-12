@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import { createReadStream } from 'fs';
 import { error } from '../handlers/errorHandler.js';
 
-const hash = (path) => {
+const commandHash = async (path) => {
   const readableStream = createReadStream(path);
 
   readableStream.on('data', (chunk) => {
@@ -16,4 +16,4 @@ const hash = (path) => {
   readableStream.on('error', error);
 }
 
-export default hash;
+export default commandHash;
