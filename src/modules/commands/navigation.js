@@ -4,7 +4,7 @@ import { error } from '../handlers/errorHandler.js';
 
 const commandUp = () => {
   chdir('..');
-}
+};
 
 const commandCd = (path) => {
   try {
@@ -17,8 +17,15 @@ const commandCd = (path) => {
 const commandLs = async () => {
   const pathToFolder = cwd();
   await readdir(pathToFolder, { withFileTypes: true })
-    .then(res => res.map(file => file.name))
-    .then(console.log)
+    .then(res => res.map(file => {
+      const Type = file.isFile() ? 'file' : 'directory'
+      return {
+        Name: file.name, Type
+      }
+    })
+      .sort((a, b) => b.Name > a.Name ? 1 : -1)
+      .sort((a, b) => a.Type > b.Type ? 1 : -1))
+    .then(console.table)
     .catch(error);
 };
 

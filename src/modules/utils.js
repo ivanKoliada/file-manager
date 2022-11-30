@@ -21,27 +21,20 @@ const isPathExist = async (path) => {
   }
 };
 
-const commandsParser = async (data) => {  
-  const arrInput = data
-    .split(' ')
-    .map(el => el.replace(/\*/g, ' '));
+const commandsParser = async (data) => {
+  const arrInput = data.split(' ').map((el) => el.replace(/\*/g, ' '));
   const pathToCurrent = arrInput[1];
   const flag = arrInput[1];
   const pathToNext = arrInput[2];
-  const isExist = !pathToCurrent
-    || arrInput[0] === COMMANDS.OS
-    || await isPathExist(pathToCurrent);
+  const isExist = !pathToCurrent || arrInput[0] === COMMANDS.OS || (await isPathExist(pathToCurrent));
   const command = isExist ? arrInput[0] : COMMANDS.NO_EXIST;
-  
+
   return {
     command,
     pathToCurrent,
     flag,
-    pathToNext
+    pathToNext,
   };
 };
 
 export { sayingBye, argumentsParser, commandsParser };
-
-
-
