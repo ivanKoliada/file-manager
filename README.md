@@ -73,10 +73,10 @@
 * compress path_to_file path_to_destination  
   for example:
   * compress D:\file-manager\src\index.js D:\file-manager\src\index.js.br
-  * compress .\folder\file.js D:\file-manager\file
+  * compress .\folder\file.js D:\file-manager\file.br
   * compress ..\folder\file.txt D:\file.br
 * decompress path_to_file path_to_destination  
   for example:
   * decompress D:\file-manager\src\index.js.br D:\file-manager\src\index.js
-  * decompress .\folder\file D:\file-manager\file.txt
+  * decompress .\folder\file.br D:\file-manager\file.txt
   * decompress ..\folder\file.br D:\file.js
