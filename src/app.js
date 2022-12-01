@@ -1,8 +1,7 @@
-import inputHandler from './modules/handlers/inputHandler.js';
-// import { getUserName, sayingBye } from './modules/utils.js';
-// import { homedir } from 'os';
 import { createInterface } from 'readline';
-import { stdin as input, stdout as output, chdir, cwd } from 'process';
+import { stdin as input, stdout as output } from 'process';
+
+import inputHandler from './modules/handlers/inputHandler.js';
 import { getUserName, getHomeDirectory } from './modules/helpers/helpers.js';
 import { printWelcome, printCurrentDirectory, printGoodbye } from './modules/loggers/logger.js';
 

@@ -1,4 +1,5 @@
 import { EOL, cpus, homedir, arch, userInfo } from 'os';
+
 import { OS } from '../constants.js';
 
 export const sysOperation = (flag) => {

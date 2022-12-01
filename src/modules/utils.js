@@ -1,7 +1,8 @@
 import { access } from 'fs/promises';
-import { COMMANDS } from './constants.js';
+
 import { operationFailed } from './loggers/error.js';
-import { argumentsSize } from './constants.js';
+
+import { COMMANDS, argumentsSize } from './constants.js';
 
 export const isPathExist = async (path) => {
   try {

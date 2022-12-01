@@ -1,5 +1,6 @@
 import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 import { createReadStream, createWriteStream } from 'fs';
+
 import { operationFailed } from '../loggers/error.js';
 
 const commandCompress = (pathToCurrent, pathToNext) => {
