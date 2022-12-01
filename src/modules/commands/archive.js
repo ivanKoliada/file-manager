@@ -1,14 +1,14 @@
 import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 import { createReadStream, createWriteStream } from 'fs';
-import { error } from '../handlers/errorHandler.js';
+import { operationFailed } from '../loggers/error.js';
 
 const commandCompress = (pathToCurrent, pathToNext) => {
   const zip = createBrotliCompress();
 
   const readableStream = createReadStream(pathToCurrent);
-  readableStream.on('error', error);
+  readableStream.on('error', operationFailed);
   const writableStream = createWriteStream(pathToNext);
-  writableStream.on('error', error);
+  writableStream.on('error', operationFailed);
 
   readableStream
     .pipe(zip)
@@ -19,9 +19,9 @@ const commandDecompress = (pathToCurrent, pathToNext) => {
   const unzip = createBrotliDecompress();
 
   const readableStream = createReadStream(pathToCurrent);
-  readableStream.on('error', error);
+  readableStream.on('error', operationFailed);
   const writableStream = createWriteStream(pathToNext);
-  writableStream.on('error', error);
+  writableStream.on('error', operationFailed);
 
   readableStream.pipe(unzip).pipe(writableStream);
 };

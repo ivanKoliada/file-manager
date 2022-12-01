@@ -1,4 +1,4 @@
-const COMMANDS = {
+export const COMMANDS = {
   UP: 'up',
   CD: 'cd',
   LS: 'ls',
@@ -13,10 +13,11 @@ const COMMANDS = {
   DECOMPRESS: 'decompress',
   OS: 'os',
   EXIT: '.exit',
-  NO_EXIST: 'noExist'
-}
+  NO_EXIST: 'noExist',
+  INVALID_INPUT: 'invalidInput',
+};
 
-const OS = {
+export const OS = {
   EOL: '--EOL',
   CPUS: '--cpus',
   HOME_DIR: '--homedir',
@@ -24,4 +25,8 @@ const OS = {
   ARCH: '--architecture',
 };
 
-export { COMMANDS, OS };
+export const argumentsSize = {
+  0: [COMMANDS.UP, COMMANDS.LS, COMMANDS.EXIT],
+  1: [COMMANDS.CD, COMMANDS.CAT, COMMANDS.ADD, COMMANDS.RM, COMMANDS.OS, COMMANDS.HASH],
+  2: [COMMANDS.RN, COMMANDS.CP, COMMANDS.MV, COMMANDS.COMPRESS, COMMANDS.DECOMPRESS],
+};

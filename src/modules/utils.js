@@ -1,40 +1,36 @@
 import { access } from 'fs/promises';
 import { COMMANDS } from './constants.js';
+import { operationFailed } from './loggers/error.js';
+import { argumentsSize } from './constants.js';
 
-const sayingBye = () => {
-  console.log(`\x1b[34m\nThank you for using File Manager, ${process.env.USER_NAME}!\x1b[0m`);
-  process.exit();
-};
-
-const argumentsParser = () => {
-  const args = process.argv.slice(2).join('');
-  const equalSign = args.indexOf('=') + 1;
-  process.env.USER_NAME = args.slice(equalSign);
-};
-
-const isPathExist = async (path) => {
+export const isPathExist = async (path) => {
   try {
     await access(path);
     return true;
   } catch {
+    operationFailed();
     return false;
   }
 };
 
-const commandsParser = async (data) => {
-  const arrInput = data.split(' ').map((el) => el.replace(/\*/g, ' '));
-  const pathToCurrent = arrInput[1];
-  const flag = arrInput[1];
-  const pathToNext = arrInput[2];
-  const isExist = !pathToCurrent || arrInput[0] === COMMANDS.OS || (await isPathExist(pathToCurrent));
-  const command = isExist ? arrInput[0] : COMMANDS.NO_EXIST;
+export const parseUserInput = async (data) => {
+  const inputData = data.split(' ').map((el) => el.replace(/\*/g, ' '));
+
+  let command = inputData.shift();
+  const args = [...inputData];
+
+  const isCommandExist = Object.values(COMMANDS).includes(command);
+  const isCorrectArgumentsSize = argumentsSize[args.length]?.includes(command);
+
+  if (!command || !isCommandExist || !isCorrectArgumentsSize) {
+    command = COMMANDS.INVALID_INPUT;
+  }
+
+  const [firstArg, secondArg] = args;
 
   return {
     command,
-    pathToCurrent,
-    flag,
-    pathToNext,
+    firstArg,
+    secondArg,
   };
 };
-
-export { sayingBye, argumentsParser, commandsParser };

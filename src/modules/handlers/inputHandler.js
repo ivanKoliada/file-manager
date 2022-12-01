@@ -3,17 +3,18 @@ import { commandUp, commandCd, commandLs } from '../commands/navigation.js';
 import commandHash from '../commands/hash.js';
 import { commandCat, commandAdd, commandRn, commandCp, commandRm } from '../commands/basic.js';
 import { commandCompress, commandDecompress } from '../commands/archive.js';
-import { COMMANDS} from '../constants.js';
+import { COMMANDS } from '../constants.js';
 import { sysOperation } from '../commands/system.js';
-import { sayingBye, commandsParser } from '../utils.js';
-import { error } from './errorHandler.js';
+import { parseUserInput, isPathExist } from '../utils.js';
+import { operationFailed, invalidInput } from '../loggers/error.js';
+import { printCurrentDirectory, printGoodbye } from '../loggers/logger.js';
 
 const inputHandler = async (data) => {
-  const { command, pathToCurrent, flag, pathToNext } = await commandsParser(data);
+  const { command, firstArg, secondArg } = await parseUserInput(data);
 
   switch (command) {
     case COMMANDS.EXIT:
-      sayingBye();
+      printGoodbye();
       break;
 
     case COMMANDS.UP:
@@ -21,7 +22,7 @@ const inputHandler = async (data) => {
       break;
 
     case COMMANDS.CD:
-      commandCd(pathToCurrent);
+      (await isPathExist(firstArg)) && commandCd(firstArg);
       break;
 
     case COMMANDS.LS:
@@ -29,48 +30,54 @@ const inputHandler = async (data) => {
       break;
 
     case COMMANDS.HASH:
-      await commandHash(pathToCurrent);
+      (await isPathExist(firstArg)) && (await commandHash(firstArg));
       break;
 
     case COMMANDS.CAT:
-      commandCat(pathToCurrent);
+      (await isPathExist(firstArg)) && commandCat(firstArg);
       break;
 
     case COMMANDS.ADD:
-      commandAdd(pathToCurrent);
+      commandAdd(firstArg);
       break;
 
     case COMMANDS.RN:
-      commandRn(pathToCurrent, pathToNext);
+      (await isPathExist(firstArg)) && commandRn(firstArg, secondArg);
       break;
 
     case COMMANDS.CP:
-      await commandCp(pathToCurrent, pathToNext);
+      (await isPathExist(firstArg)) && (await isPathExist(secondArg)) && (await commandCp(firstArg, secondArg));
       break;
 
     case COMMANDS.MV:
-      await commandCp(pathToCurrent, pathToNext);
-      commandRm(pathToCurrent);
+      if ((await isPathExist(firstArg)) && (await isPathExist(secondArg))) {
+        await commandCp(firstArg, secondArg);
+        commandRm(firstArg);
+      }
       break;
 
     case COMMANDS.RM:
-      commandRm(pathToCurrent, pathToNext);
+      (await isPathExist(firstArg)) && commandRm(firstArg);
       break;
 
     case COMMANDS.COMPRESS:
-      commandCompress(pathToCurrent, pathToNext);
+      (await isPathExist(firstArg)) && commandCompress(firstArg, secondArg);
       break;
 
     case COMMANDS.DECOMPRESS:
-      commandDecompress(pathToCurrent, pathToNext);
+      (await isPathExist(firstArg)) && commandDecompress(firstArg, secondArg);
       break;
 
     case COMMANDS.OS:
-      sysOperation(flag);
+      sysOperation(firstArg);
       break;
-    
+
     case COMMANDS.NO_EXIST:
-      error();
+      operationFailed();
+      break;
+
+    case COMMANDS.INVALID_INPUT:
+      invalidInput();
       break;
 
     default:
@@ -78,7 +85,7 @@ const inputHandler = async (data) => {
       break;
   }
 
-  console.log(`\x1b[34m\nYou are currently in ${cwd()}\x1b[0m`);
+  printCurrentDirectory();
 };
 
 export default inputHandler;

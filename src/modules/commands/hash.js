@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import { createReadStream } from 'fs';
-import { error } from '../handlers/errorHandler.js';
+import { operationFailed } from '../loggers/error.js';
 
 const commandHash = async (path) => {
   const readableStream = createReadStream(path);
@@ -13,7 +13,7 @@ const commandHash = async (path) => {
     console.log(`\x1b[34m'${hash}\x1b[0m`); 
   })
 
-  readableStream.on('error', error);
+  readableStream.on('error', operationFailed);
 }
 
 export default commandHash;
