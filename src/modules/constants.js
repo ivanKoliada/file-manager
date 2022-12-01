@@ -13,9 +13,9 @@ export const COMMANDS = {
   DECOMPRESS: 'decompress',
   OS: 'os',
   EXIT: '.exit',
-  NO_EXIST: 'noExist',
-  INVALID_INPUT: 'invalidInput',
 };
+
+export const INVALID_CASE = 'invalid'
 
 export const OS = {
   EOL: '--EOL',

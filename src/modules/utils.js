@@ -2,7 +2,7 @@ import { access } from 'fs/promises';
 
 import { operationFailed } from './loggers/error.js';
 
-import { COMMANDS, argumentsSize } from './constants.js';
+import { COMMANDS, argumentsSize, INVALID_CASE } from './constants.js';
 
 export const isPathExist = async (path) => {
   try {
@@ -24,7 +24,7 @@ export const parseUserInput = async (data) => {
   const isCorrectArgumentsSize = argumentsSize[args.length]?.includes(command);
 
   if (!command || !isCommandExist || !isCorrectArgumentsSize) {
-    command = COMMANDS.INVALID_INPUT;
+    command = INVALID_CASE;
   }
 
   const [firstArg, secondArg] = args;

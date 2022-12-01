@@ -4,10 +4,10 @@ import { commandUp, commandCd, commandLs } from '../commands/navigation.js';
 import { commandCompress, commandDecompress } from '../commands/archive.js';
 import { commandCat, commandAdd, commandRn, commandCp, commandRm } from '../commands/basic.js';
 import { printCurrentDirectory, printGoodbye } from '../loggers/logger.js';
-import { operationFailed, invalidInput } from '../loggers/error.js';
+import { invalidInput } from '../loggers/error.js';
 import { parseUserInput, isPathExist } from '../utils.js';
 
-import { COMMANDS } from '../constants.js';
+import { COMMANDS, INVALID_CASE } from '../constants.js';
 
 const inputHandler = async (data) => {
   const { command, firstArg, secondArg } = await parseUserInput(data);
@@ -72,16 +72,12 @@ const inputHandler = async (data) => {
       sysOperation(firstArg);
       break;
 
-    case COMMANDS.NO_EXIST:
-      operationFailed();
-      break;
-
-    case COMMANDS.INVALID_INPUT:
+    case INVALID_CASE:
       invalidInput();
       break;
 
     default:
-      console.log('\x1b[31mInvalid input, you should enter another command\x1b[0m');
+      console.log('\x1b[31mSomething went wrong\x1b[0m');
       break;
   }
 
