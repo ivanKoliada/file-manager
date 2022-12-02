@@ -1,7 +1,7 @@
 # file-manager
 
 ### Cross-check review:
-1. Make sure that you have **v16 LTS Node** installed on your computer
+1. Make sure that you have **v18 LTS Node** installed on your computer
 1. git clone https://github.com/ivanKoliada/file-manager.git
 1. git checkout file-manager
 
@@ -34,11 +34,11 @@
 * add new_file_name  
   for example:
   * add file.txt
-* rn path_to_file new_filename  
+* rn path_to_file path_to_new_filename  
   for example:
-  * rename D:\file-manager\src\index.js D:\file-manager\src\index2.js
-  * rename file.txt file2.txt
-  * rename .\folder\file.txt .\folder\file2.txt
+  * rn D:\file-manager\src\index.js D:\file-manager\src\index2.js
+  * rn file.txt file2.txt
+  * rn .\folder\file.txt .\folder\file2.txt
 * cp path_to_file path_to_new_directory 
   for example:
   * cp D:\file-manager\src\index.js D:\file-manager\
