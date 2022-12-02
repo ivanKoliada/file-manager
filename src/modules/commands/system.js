@@ -9,7 +9,7 @@ export const sysOperation = (flag) => {
       break;
 
     case OS.CPUS:
-      console.log(
+      console.table(
         cpus().map((el) => ({
           model: el.model,
           speed: Math.floor(el.speed / 100) / 10,
