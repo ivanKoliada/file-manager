@@ -1,7 +1,7 @@
 # file-manager
 
 ### Cross-check review:
-1. Make sure that you have **v16 LTS Node** installed on your computer
+1. Make sure that you have **v18 LTS Node** installed on your computer
 1. git clone https://github.com/ivanKoliada/file-manager.git
 1. git checkout file-manager
 
