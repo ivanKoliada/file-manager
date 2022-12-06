@@ -8,7 +8,7 @@ const commandHash = async (path) => {
   let data = '';
 
   readableStream.on('data', (chunk) => {
-    data += `${chunk} `;
+    data += `${chunk}`;
   });
 
   readableStream.on('end', () => {
